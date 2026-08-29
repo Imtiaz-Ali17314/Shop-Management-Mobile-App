@@ -5,6 +5,7 @@ import {
   StyleSheet,
   Text,
   TextInput,
+  TouchableOpacity,
   View,
 } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
@@ -12,6 +13,25 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 const CreateScreen = ({ data }) => {
   const [itemName, setItemName] = useState('');
   const [stockAmt, setStockAmt] = useState('');
+  const [itemsData, setItemsData] = useState(data);
+
+  const handleAddItem = () => {
+    if (!itemName || !stockAmt) {
+      alert('Please enter both item name and stock amount.');
+      return;
+    }
+
+    const newItem = {
+      id: (itemsData.length + 1).toString(),
+      name: itemName,
+      stock: parseInt(stockAmt),
+    };
+    setItemsData([newItem, ...itemsData]);
+
+    setItemName('');
+    setStockAmt('');
+  };
+
   return (
     <View style={styles.container}>
       <TextInput
@@ -31,15 +51,15 @@ const CreateScreen = ({ data }) => {
         keyboardType="numeric"
       />
 
-      <Pressable style={styles.button}>
+      <TouchableOpacity style={styles.button} onPress={handleAddItem}>
         <Text style={styles.buttonText}>ADD ITEM IN THE STOCK</Text>
-      </Pressable>
+      </TouchableOpacity>
 
       <SafeAreaView style={{ flex: 1 }} edges={['bottom']}>
         <Text style={styles.headingText}>All Items in the Stock</Text>
 
         <FlatList
-          data={data}
+          data={itemsData}
           keyExtractor={item => item.id}
           renderItem={({ item }) => (
             <View
@@ -85,7 +105,7 @@ const styles = StyleSheet.create({
   },
 
   button: {
-    backgroundColor: '#CABFEEFF',
+    backgroundColor: '#CAA6EAFF',
     paddingVertical: 10,
     paddingHorizontal: 15,
     borderRadius: 7,
