@@ -1,97 +1,133 @@
-This is a new [**React Native**](https://reactnative.dev) project, bootstrapped using [`@react-native-community/cli`](https://github.com/react-native-community/cli).
+# 🛍️ Shop Management Mobile App
 
-# Getting Started
+[![React Native](https://img.shields.io/badge/React_Native-v0.87.1-61DAFB?logo=react&logoColor=black)](https://reactnative.dev/)
+[![React](https://img.shields.io/badge/React-v19.2.3-61DAFB?logo=react&logoColor=black)](https://reactjs.org/)
+[![Platform](https://img.shields.io/badge/Platform-Android%20%7C%20iOS-brightgreen)](https://reactnative.dev/)
+[![License](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
 
-> **Note**: Make sure you have completed the [Set Up Your Environment](https://reactnative.dev/docs/set-up-your-environment) guide before proceeding.
+A clean, responsive, and intuitive **Shop Inventory & Stock Management** mobile application built using **React Native**. Designed to help small businesses, retail shops, and store managers track inventory levels, monitor low stock items in real-time, and seamlessly perform item management tasks.
 
-## Step 1: Start Metro
+---
 
-First, you will need to run **Metro**, the JavaScript build tool for React Native.
+## 📱 Application Preview
 
-To start the Metro dev server, run the following command from the root of your React Native project:
+<div align="center">
+  <img src="./assets/shop-app.PNG" alt="Shop Management App Preview" width="350" />
+</div>
 
-```sh
-# Using npm
-npm start
+---
 
-# OR using Yarn
-yarn start
+## ✨ Key Features
+
+- 📊 **Interactive Dashboard**: Effortlessly switch between item views with dynamic tab navigation.
+- 📦 **All Items Overview**: View complete stock inventory with clear item names and quantities.
+- ⚠️ **Low Stock Alert System**:
+  - Automatically highlights items with low inventory (< 20 units) in red for high visibility.
+  - Dedicated **Low Stock** filter view to quickly prioritize items needing reorder.
+- 🛠️ **Full CRUD Operations**:
+  - **Create**: Add new inventory items with custom names and initial stock levels.
+  - **Read**: Live stock list rendering powered by optimized `FlatList`.
+  - **Update**: Easily update item names or stock numbers in place.
+  - **Delete**: Instant item removal functionality.
+- ✔️ **Smart Form Validation**: Built-in validation ensuring valid item names and non-negative numeric stock quantities.
+- 📱 **Cross-Platform & UX Optimized**: Includes `SafeAreaView` and `KeyboardAvoidingView` to deliver a native look and feel on both iOS and Android.
+
+---
+
+## 🛠️ Tech Stack & Dependencies
+
+- **Framework**: [React Native](https://reactnative.dev/) (v0.87.1)
+- **Library**: [React](https://reactjs.org/) (v19.2.3)
+- **UI & Layout**: `react-native-safe-area-context`
+- **Language**: JavaScript (ES6+) / TypeScript
+- **Tooling & Build**: Metro Bundler, Babel, ESLint, Prettier
+
+---
+
+## 📁 Repository Structure
+
+```
+Shop-Management-Mobile-App/
+├── assets/                  # Application media assets & screenshots
+│   └── shop-app.PNG         # Main app preview screenshot
+├── src/
+│   ├── data/                # Initial mockup data & type definitions
+│   │   └── itmesData.ts     # Sample shop items data
+│   ├── screens/             # Screen components
+│   │   ├── AllItemsScreen.jsx  # Main stock list screen
+│   │   ├── StockScreen.jsx     # Filtered low-stock items screen
+│   │   └── CreateScreen.jsx    # Add, Edit & Delete management screen
+│   └── HomeScreen.jsx       # Dashboard container & tab navigation logic
+├── App.jsx                  # Main entry component
+├── index.js                 # App registry entry point
+├── package.json             # Project dependencies and scripts
+└── README.md                # Project documentation
 ```
 
-## Step 2: Build and run your app
+---
 
-With Metro running, open a new terminal window/pane from the root of your React Native project, and use one of the following commands to build and run your Android or iOS app:
+## 🚀 Getting Started
 
-### Android
+Follow these steps to get a local copy up and running on your development machine.
 
-```sh
-# Using npm
-npm run android
+### Prerequisites
 
-# OR using Yarn
-yarn android
-```
+Ensure you have your environment set up according to the official [React Native CLI Environment Setup](https://reactnative.dev/docs/set-up-your-environment) guide:
 
-### iOS
+- **Node.js**: `>= 22.11.0`
+- **npm** or **yarn**
+- **Android Studio** (for Android Emulator/Device) or **Xcode** (for iOS Simulator - macOS only)
 
-For iOS, remember to install CocoaPods dependencies (this only needs to be run on first clone or after updating native deps).
+### Installation & Setup
 
-The first time you create a new project, run the Ruby bundler to install CocoaPods itself:
+1. **Clone the Repository**
+   ```bash
+   git clone https://github.com/Imtiaz-Ali17314/Shop-Management-Mobile-App.git
+   cd Shop-Management-Mobile-App
+   ```
 
-```sh
-bundle install
-```
+2. **Install Dependencies**
+   ```bash
+   npm install
+   ```
 
-Then, and every time you update your native dependencies, run:
+3. **Start the Metro Bundler**
+   ```bash
+   npm start
+   ```
 
-```sh
-bundle exec pod install
-```
+4. **Run on Android / iOS**
 
-For more information, please visit [CocoaPods Getting Started guide](https://guides.cocoapods.org/using/getting-started.html).
+   - **Android**:
+     ```bash
+     npm run android
+     ```
 
-```sh
-# Using npm
-npm run ios
+   - **iOS** (macOS only):
+     ```bash
+     cd ios && pod install && cd ..
+     npm run ios
+     ```
 
-# OR using Yarn
-yarn ios
-```
+---
 
-If everything is set up correctly, you should see your new app running in the Android Emulator, iOS Simulator, or your connected device.
+## 🔮 Future Improvements
 
-This is one way to run your app — you can also build it directly from Android Studio or Xcode.
+- 💾 **Persistent Storage**: Integrate `@react-native-async-storage/async-storage` or SQLite/Realm for persistent local data offline.
+- 🔍 **Search & Filter**: Add search bar to quickly search items by name or category.
+- 📈 **Analytics & Reports**: Visual stock trends and low stock alerts via push notifications.
+- 🎨 **Theme Support**: Dark mode & custom store branding options.
 
-## Step 3: Modify your app
+---
 
-Now that you have successfully run the app, let's make changes!
+## 👨‍💻 Author
 
-Open `App.tsx` in your text editor of choice and make some changes. When you save, your app will automatically update and reflect these changes — this is powered by [Fast Refresh](https://reactnative.dev/docs/fast-refresh).
+**Imtiaz Ali**
+- GitHub: [@Imtiaz-Ali17314](https://github.com/Imtiaz-Ali17314)
+- Portfolio / Projects: Shop Management Mobile App
 
-When you want to forcefully reload, for example to reset the state of your app, you can perform a full reload:
+---
 
-- **Android**: Press the <kbd>R</kbd> key twice or select **"Reload"** from the **Dev Menu**, accessed via <kbd>Ctrl</kbd> + <kbd>M</kbd> (Windows/Linux) or <kbd>Cmd ⌘</kbd> + <kbd>M</kbd> (macOS).
-- **iOS**: Press <kbd>R</kbd> in iOS Simulator.
+## 📄 License
 
-## Congratulations! :tada:
-
-You've successfully run and modified your React Native App. :partying_face:
-
-### Now what?
-
-- If you want to add this new React Native code to an existing application, check out the [Integration guide](https://reactnative.dev/docs/integration-with-existing-apps).
-- If you're curious to learn more about React Native, check out the [docs](https://reactnative.dev/docs/getting-started).
-
-# Troubleshooting
-
-If you're having issues getting the above steps to work, see the [Troubleshooting](https://reactnative.dev/docs/troubleshooting) page.
-
-# Learn More
-
-To learn more about React Native, take a look at the following resources:
-
-- [React Native Website](https://reactnative.dev) - learn more about React Native.
-- [Getting Started](https://reactnative.dev/docs/environment-setup) - an **overview** of React Native and how setup your environment.
-- [Learn the Basics](https://reactnative.dev/docs/getting-started) - a **guided tour** of the React Native **basics**.
-- [Blog](https://reactnative.dev/blog) - read the latest official React Native **Blog** posts.
-- [`@facebook/react-native`](https://github.com/facebook/react-native) - the Open Source; GitHub **repository** for React Native.
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
