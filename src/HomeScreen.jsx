@@ -66,7 +66,8 @@ const styles = StyleSheet.create({
     width: '100%',
     height: '100%',
     backgroundColor: '#fff',
-    padding: '4%',
+    paddingHorizontal: '15%',
+    paddingVertical: '10%',
   },
   title: {
     fontSize: 24,
@@ -82,7 +83,7 @@ const styles = StyleSheet.create({
     paddingVertical: 3.5,
     paddingHorizontal: 10,
     borderRadius: 50,
-    borderWidth: 0.5,
+    borderWidth: 1,
     borderColor: '#72C37AFF',
   },
   btnText: {

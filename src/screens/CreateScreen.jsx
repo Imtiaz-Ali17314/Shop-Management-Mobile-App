@@ -61,6 +61,7 @@ const CreateScreen = ({ data }) => {
             </View>
           )}
           contentContainerStyle={{ gap: 10 }}
+          showsVerticalScrollIndicator={false}
         />
       </SafeAreaView>
     </View>
@@ -72,7 +73,6 @@ export default CreateScreen;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    paddingVertical: '4%',
     gap: 10,
   },
 
