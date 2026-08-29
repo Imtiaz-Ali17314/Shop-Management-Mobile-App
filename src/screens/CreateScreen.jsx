@@ -14,15 +14,34 @@ const CreateScreen = ({ data }) => {
   const [itemName, setItemName] = useState('');
   const [stockAmt, setStockAmt] = useState('');
   const [itemsData, setItemsData] = useState(data);
+  const [editingItemId, setEditingItemId] = useState(null);
+  const [isEdit, setIsEdit] = useState(false);
 
-  const handleAddItem = () => {
+  const validateInput = () => {
     if (!itemName || !stockAmt) {
       alert('Please enter both item name and stock amount.');
+      return false;
+    }
+    if (isNaN(stockAmt) || parseInt(stockAmt) < 0) {
+      alert('Please enter a valid stock amount (only numbers).');
+      return false;
+    }
+    if (!isNaN(itemName)) {
+      alert('Please enter a valid item name (letters only).');
+      return false;
+    }
+    return true;
+  };
+
+  const handleAddItem = () => {
+    setIsEdit(false);
+
+    if (!validateInput()) {
       return;
     }
 
     const newItem = {
-      id: (itemsData.length + 1).toString(),
+      id: Date.now().toString(),
       name: itemName,
       stock: parseInt(stockAmt),
     };
@@ -35,6 +54,35 @@ const CreateScreen = ({ data }) => {
   const handleDelete = itemId => {
     const updatedItems = itemsData.filter(item => item.id !== itemId);
     setItemsData(updatedItems);
+  };
+
+  const handleEdit = itemId => {
+    setIsEdit(true);
+    const itemToEdit = itemsData.find(item => item.id === itemId);
+    if (itemToEdit) {
+      setItemName(itemToEdit.name);
+      setStockAmt(itemToEdit.stock.toString());
+      setEditingItemId(itemId);
+    }
+  };
+
+  const handleUpdateItem = () => {
+    if (!validateInput()) {
+      return;
+    }
+    const updatedItems = itemsData.map(item => {
+      if (item.id === editingItemId) {
+        return { ...item, name: itemName, stock: parseInt(stockAmt) };
+      }
+      return item;
+    });
+
+    setItemsData(updatedItems);
+
+    setIsEdit(false);
+    setItemName('');
+    setStockAmt('');
+    setEditingItemId(null);
   };
 
   return (
@@ -56,8 +104,13 @@ const CreateScreen = ({ data }) => {
         keyboardType="numeric"
       />
 
-      <TouchableOpacity style={styles.button} onPress={handleAddItem}>
-        <Text style={styles.buttonText}>ADD ITEM IN THE STOCK</Text>
+      <TouchableOpacity
+        style={styles.button}
+        onPress={isEdit ? handleUpdateItem : handleAddItem}
+      >
+        <Text style={styles.buttonText}>
+          {isEdit ? 'UPDATE ITEM' : 'ADD ITEM IN THE STOCK'}
+        </Text>
       </TouchableOpacity>
 
       <SafeAreaView style={{ flex: 1 }} edges={['bottom']}>
