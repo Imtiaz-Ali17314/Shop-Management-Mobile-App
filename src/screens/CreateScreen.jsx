@@ -32,6 +32,11 @@ const CreateScreen = ({ data }) => {
     setStockAmt('');
   };
 
+  const handleDelete = itemId => {
+    const updatedItems = itemsData.filter(item => item.id !== itemId);
+    setItemsData(updatedItems);
+  };
+
   return (
     <View style={styles.container}>
       <TextInput
@@ -75,8 +80,18 @@ const CreateScreen = ({ data }) => {
                   {item.stock}
                 </Text>
 
-                <Text style={styles.itemText}>Edit</Text>
-                <Text style={styles.itemText}>Delete</Text>
+                <Pressable
+                  style={({ pressed }) => [{ opacity: pressed ? 0.7 : 1 }]}
+                  onPress={() => handleEdit(item.id)}
+                >
+                  <Text style={styles.itemText}>Edit</Text>
+                </Pressable>
+                <Pressable
+                  style={({ pressed }) => [{ opacity: pressed ? 0.7 : 1 }]}
+                  onPress={() => handleDelete(item.id)}
+                >
+                  <Text style={styles.itemText}>Delete</Text>
+                </Pressable>
               </View>
             </View>
           )}
