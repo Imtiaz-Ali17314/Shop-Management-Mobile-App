@@ -9,6 +9,7 @@ import {
   View,
 } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
+import { KeyboardAvoidingView, Platform } from 'react-native';
 
 const CreateScreen = ({ data }) => {
   const [itemName, setItemName] = useState('');
@@ -86,73 +87,81 @@ const CreateScreen = ({ data }) => {
   };
 
   return (
-    <View style={styles.container}>
-      <TextInput
-        placeholder="Enter an item name..."
-        placeholderTextColor="#999"
-        style={styles.input}
-        value={itemName}
-        onChangeText={setItemName}
-      />
+    <KeyboardAvoidingView
+      style={{ flex: 1 }}
+      behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
+    >
+      <SafeAreaView style={{ flex: 1 }} edges={['top', 'bottom']}>
+        <View style={styles.container}>
+          <TextInput
+            placeholder="Enter an item name..."
+            placeholderTextColor="#999"
+            style={styles.input}
+            value={itemName}
+            onChangeText={setItemName}
+          />
 
-      <TextInput
-        placeholder="Enter stock amount..."
-        placeholderTextColor="#999"
-        style={styles.input}
-        value={stockAmt}
-        onChangeText={setStockAmt}
-        keyboardType="numeric"
-      />
+          <TextInput
+            placeholder="Enter stock amount..."
+            placeholderTextColor="#999"
+            style={styles.input}
+            value={stockAmt}
+            onChangeText={setStockAmt}
+            keyboardType="numeric"
+          />
 
-      <TouchableOpacity
-        style={styles.button}
-        onPress={isEdit ? handleUpdateItem : handleAddItem}
-      >
-        <Text style={styles.buttonText}>
-          {isEdit ? 'UPDATE ITEM' : 'ADD ITEM IN THE STOCK'}
-        </Text>
-      </TouchableOpacity>
+          <TouchableOpacity
+            style={styles.button}
+            onPress={isEdit ? handleUpdateItem : handleAddItem}
+          >
+            <Text style={styles.buttonText}>
+              {isEdit ? 'UPDATE ITEM' : 'ADD ITEM IN THE STOCK'}
+            </Text>
+          </TouchableOpacity>
 
-      <SafeAreaView style={{ flex: 1 }} edges={['bottom']}>
-        <Text style={styles.headingText}>All Items in the Stock</Text>
+          <Text style={styles.headingText}>All Items in the Stock</Text>
 
-        <FlatList
-          data={itemsData}
-          keyExtractor={item => item.id}
-          renderItem={({ item }) => (
-            <View
-              style={[
-                styles.itemContainer,
-                { backgroundColor: item.stock < 20 ? '#ffcccc' : '#D7F6BF' },
-              ]}
-            >
-              <Text style={styles.itemText}>{item.name}</Text>
+          <FlatList
+            data={itemsData}
+            keyExtractor={item => item.id}
+            renderItem={({ item }) => (
+              <View
+                style={[
+                  styles.itemContainer,
+                  { backgroundColor: item.stock < 20 ? '#ffcccc' : '#D7F6BF' },
+                ]}
+              >
+                <Text style={styles.itemText}>{item.name}</Text>
 
-              <View style={{ flexDirection: 'row', gap: 15 }}>
-                <Text style={[styles.itemText, { marginEnd: 50 }]}>
-                  {item.stock}
-                </Text>
+                <View style={{ flexDirection: 'row', gap: 15 }}>
+                  <Text style={[styles.itemText, { marginEnd: 50 }]}>
+                    {item.stock}
+                  </Text>
 
-                <Pressable
-                  style={({ pressed }) => [{ opacity: pressed ? 0.7 : 1 }]}
-                  onPress={() => handleEdit(item.id)}
-                >
-                  <Text style={styles.itemText}>Edit</Text>
-                </Pressable>
-                <Pressable
-                  style={({ pressed }) => [{ opacity: pressed ? 0.7 : 1 }]}
-                  onPress={() => handleDelete(item.id)}
-                >
-                  <Text style={styles.itemText}>Delete</Text>
-                </Pressable>
+                  <Pressable
+                    style={({ pressed }) => [{ opacity: pressed ? 0.7 : 1 }]}
+                    onPress={() => handleEdit(item.id)}
+                  >
+                    <Text style={styles.itemText}>Edit</Text>
+                  </Pressable>
+                  <Pressable
+                    style={({ pressed }) => [{ opacity: pressed ? 0.7 : 1 }]}
+                    onPress={() => handleDelete(item.id)}
+                  >
+                    <Text style={styles.itemText}>Delete</Text>
+                  </Pressable>
+                </View>
               </View>
-            </View>
-          )}
-          contentContainerStyle={{ gap: 10 }}
-          showsVerticalScrollIndicator={false}
-        />
+            )}
+            contentContainerStyle={{
+              gap: 10,
+              paddingBottom: 45,
+            }}
+            showsVerticalScrollIndicator={false}
+          />
+        </View>
       </SafeAreaView>
-    </View>
+    </KeyboardAvoidingView>
   );
 };
 
@@ -162,6 +171,8 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     gap: 10,
+    paddingHorizontal: 10,
+    paddingTop: 10,
   },
 
   input: {
@@ -191,7 +202,6 @@ const styles = StyleSheet.create({
     fontSize: 16,
     fontWeight: '500',
     marginTop: 5,
-    marginBottom: 15,
   },
 
   itemContainer: {

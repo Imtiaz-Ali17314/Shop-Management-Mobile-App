@@ -23,7 +23,7 @@ const AllItemsScreen = ({ data }) => {
             <Text style={styles.itemText}>{item.stock}</Text>
           </View>
         )}
-        contentContainerStyle={{ gap: 10, paddingBottom: 50 }}
+        contentContainerStyle={{ gap: 10, marginTop: 5 }}
       />
     </SafeAreaView>
   );
