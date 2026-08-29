@@ -1,15 +1,16 @@
 import { useState } from 'react';
 import { Pressable, StyleSheet, Text, View } from 'react-native';
-import AllItemsScreen from './AllItemsScreen';
-import StockScreen from './StockScreen';
-import CreateScreen from './CreateScreen';
-import { ItemsData } from '../data/itmesData';
+import AllItemsScreen from './screens/AllItemsScreen';
+import StockScreen from './screens/StockScreen';
+import CreateScreen from './screens/CreateScreen';
+import { ItemsData } from './data/itmesData';
+import { SafeAreaView } from 'react-native-safe-area-context';
 
 const HomeScreen = () => {
   const [view, setView] = useState(0);
 
   return (
-    <View style={styles.container}>
+    <SafeAreaView style={styles.container}>
       <Text style={styles.title}>Dashboard</Text>
       <View style={styles.btnContainer}>
         <Pressable
@@ -53,8 +54,8 @@ const HomeScreen = () => {
       {view === 1 && (
         <StockScreen data={ItemsData.filter(item => item.stock < 20)} />
       )}
-      {view === 2 && <CreateScreen />}
-    </View>
+      {view === 2 && <CreateScreen data={ItemsData} />}
+    </SafeAreaView>
   );
 };
 

@@ -1,8 +1,9 @@
 import { FlatList, StyleSheet, Text, View } from 'react-native';
+import { SafeAreaView } from 'react-native-safe-area-context';
 
 const AllItemsScreen = ({ data }) => {
   return (
-    <View>
+    <SafeAreaView style={{ flex: 1 }} edges={['bottom']}>
       <View style={styles.headingContainer}>
         <Text style={styles.headingText}>Items</Text>
         <Text style={styles.headingText}>Quantity</Text>
@@ -22,9 +23,9 @@ const AllItemsScreen = ({ data }) => {
             <Text style={styles.itemText}>{item.stock}</Text>
           </View>
         )}
-        contentContainerStyle={{ gap: 10 }}
+        contentContainerStyle={{ gap: 10, paddingBottom: 50 }}
       />
-    </View>
+    </SafeAreaView>
   );
 };
 
