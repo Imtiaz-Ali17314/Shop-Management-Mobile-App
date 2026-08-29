@@ -7,6 +7,7 @@ import {
   TextInput,
   View,
 } from 'react-native';
+import { SafeAreaView } from 'react-native-safe-area-context';
 
 const CreateScreen = ({ data }) => {
   const [itemName, setItemName] = useState('');
@@ -34,7 +35,7 @@ const CreateScreen = ({ data }) => {
         <Text style={styles.buttonText}>ADD ITEM IN THE STOCK</Text>
       </Pressable>
 
-      <View>
+      <SafeAreaView style={{ flex: 1 }} edges={['bottom']}>
         <Text style={styles.headingText}>All Items in the Stock</Text>
 
         <FlatList
@@ -48,9 +49,12 @@ const CreateScreen = ({ data }) => {
               ]}
             >
               <Text style={styles.itemText}>{item.name}</Text>
-              <Text style={styles.itemText}>{item.stock}</Text>
 
               <View style={{ flexDirection: 'row', gap: 15 }}>
+                <Text style={[styles.itemText, { marginEnd: 50 }]}>
+                  {item.stock}
+                </Text>
+
                 <Text style={styles.itemText}>Edit</Text>
                 <Text style={styles.itemText}>Delete</Text>
               </View>
@@ -58,7 +62,7 @@ const CreateScreen = ({ data }) => {
           )}
           contentContainerStyle={{ gap: 10 }}
         />
-      </View>
+      </SafeAreaView>
     </View>
   );
 };
@@ -67,6 +71,7 @@ export default CreateScreen;
 
 const styles = StyleSheet.create({
   container: {
+    flex: 1,
     paddingVertical: '4%',
     gap: 10,
   },
